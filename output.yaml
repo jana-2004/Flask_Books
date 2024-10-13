@@ -1,74 +1,62 @@
+openapi: 3.0.0
 info:
-  _postman_id: a4b5f7b7-c8ec-4d99-b257-614f423382df
-  name: books
-  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
-  _exporter_id: '38970245'
-item:
-  - name: get all
-    request:
-      method: GET
-      header: []
-    response: []
-  - name: give new book
-    request:
-      method: POST
-      header: []
-      body:
-        mode: raw
-        raw: "{\r\n    \"title\":\"Linear books\",\r\n    \"completed\":\"False\"\r\n\r\n}"
-        options:
-          raw:
-            language: json
-      url:
-        raw: localhost:9000/books
-        host:
-          - localhost
-        port: '9000'
-        path:
-          - books
-    response: []
-  - name: update book info
-    request:
-      method: PUT
-      header: []
-      body:
-        mode: raw
-        raw: "{\r\n    \"completed\":\"True\"\r\n}"
-        options:
-          raw:
-            language: json
-      url:
-        raw: localhost:9000/books/2
-        host:
-          - localhost
-        port: '9000'
-        path:
-          - books
-          - '2'
-    response: []
-  - name: Delete book by id
-    request:
-      method: DELETE
-      header: []
-      url:
-        raw: localhost:9000/books/3
-        host:
-          - localhost
-        port: '9000'
-        path:
-          - books
-          - '3'
-    response: []
-  - name: get a book by id
-    request:
-      method: GET
-      header: []
-      url:
-        raw: localhost:9000/books/1
-        host:
-          - localhost
-        port: '9000'
-        path:
-          - books
-          - '1'
-    response: []
+  title: books
+  version: 1.0.0
+servers:
+  - url: localhost://
+paths:
+  /000/books:
+    post:
+      tags:
+        - default
+      summary: give new book
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: Linear books
+                completed: 'False'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/books/2:
+    put:
+      tags:
+        - default
+      summary: update book info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                completed: 'True'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/books/3:
+    delete:
+      tags:
+        - default
+      summary: Delete book by id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /000/books/1:
+    get:
+      tags:
+        - default
+      summary: get a book by id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
