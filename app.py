@@ -10,4 +10,4 @@ def not_found(e):
     return jsonify({"error":"Resource not found"}),404
 
 if __name__=="__main__":
-    app.run(debug=True,port=9090)
+    app.run(debug=True,port=9000)
