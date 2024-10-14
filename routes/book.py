@@ -43,11 +43,14 @@ def get_book_only_by_id(id):
 
 # Delete book item
 
-@books_bp.route("/<int:id>",methods=["DELETE"])
+@books_bp.route("/<int:id>", methods=["DELETE"])
 def delete_book(id):
     global books
-    books=[b for b in books if b["id"]!=id]
-    return '',204
+    book_to_delete = next((b for b in books if b["id"] == id), None)
+    if book_to_delete is None:
+        return {"message": "Book not found"}, 404
+    books = [b for b in books if b["id"] != id]
+    return '', 204
 
 # handler for error
 @books_bp.errorhandler(404)

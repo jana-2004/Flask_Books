@@ -3,60 +3,79 @@ info:
   title: books
   version: 1.0.0
 servers:
-  - url: localhost://
+- url: http://localhost:9000
 paths:
-  /000/books:
+  /books:
+    get:
+      summary: Get all books
+      responses:
+        '200':
+          description: A list of books
     post:
-      tags:
-        - default
-      summary: give new book
+      summary: Create a new book
       requestBody:
         content:
           application/json:
             schema:
               type: object
+              properties:
+                title:
+                  type: string
+                completed:
+                  type: boolean
               example:
                 title: Linear books
-                completed: 'False'
+                completed: false
+      responses:
+        '201':
+          description: Book created
+  /books/{id}:
+    get:
+      summary: Get a book by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /000/books/2:
+          description: A book
+        '404':
+          description: Book not found
     put:
-      tags:
-        - default
-      summary: update book info
+      summary: Update a book by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       requestBody:
         content:
           application/json:
             schema:
               type: object
+              properties:
+                completed:
+                  type: boolean
               example:
-                completed: 'True'
+                completed: true
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /000/books/3:
+          description: Book updated
+        '404':
+          description: Book not found
     delete:
-      tags:
-        - default
-      summary: Delete book by id
+      summary: Delete a book by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /000/books/1:
-    get:
-      tags:
-        - default
-      summary: get a book by id
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: Book deleted
+        '404':
+          description: Book not found
